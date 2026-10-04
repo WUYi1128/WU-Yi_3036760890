@@ -1,0 +1,41 @@
+Row,Description,Column,Replication_Mean,Original_Mean,Mean_Difference,Replication_SE,Original_SE,N
+1,"FTE employment before, all available observations",PA,23.331169,23.330000,0.001169,1.351149,1.350000,77.000000
+1,"FTE employment before, all available observations",NJ,20.439408,20.440000,-0.000592,0.508261,0.510000,321.000000
+1,"FTE employment before, all available observations",NJ - PA,-2.891761,-2.890000,-0.001761,1.443583,1.440000,
+1,"FTE employment before, all available observations",NJ Low,19.556701,19.560000,-0.003299,0.774856,0.770000,97.000000
+1,"FTE employment before, all available observations",NJ Mid,20.080657,20.080000,0.000657,0.841274,0.840000,137.000000
+1,"FTE employment before, all available observations",NJ High,22.250000,22.250000,0.000000,1.135799,1.140000,71.000000
+1,"FTE employment before, all available observations",Low - High,-2.693299,-2.690000,-0.003299,1.374933,1.370000,
+1,"FTE employment before, all available observations",Mid - High,-2.169343,-2.170000,0.000657,1.413429,1.410000,
+2,"FTE employment after, all available observations",PA,21.165584,21.170000,-0.004416,0.943221,0.940000,77.000000
+2,"FTE employment after, all available observations",NJ,21.027429,21.030000,-0.002571,0.520309,0.520000,319.000000
+2,"FTE employment after, all available observations",NJ - PA,-0.138155,-0.140000,0.001845,1.077213,1.070000,
+2,"FTE employment after, all available observations",NJ Low,20.877551,20.880000,-0.002449,1.005902,1.010000,98.000000
+2,"FTE employment after, all available observations",NJ Mid,20.955556,20.960000,-0.004444,0.755608,0.760000,135.000000
+2,"FTE employment after, all available observations",NJ High,20.213768,20.210000,0.003768,1.025104,1.030000,69.000000
+2,"FTE employment after, all available observations",Low - High,0.663783,0.670000,-0.006217,1.436202,1.440000,
+2,"FTE employment after, all available observations",Mid - High,0.741787,0.750000,-0.008213,1.273492,1.270000,
+3,Change in mean FTE employment,PA,-2.165584,-2.160000,-0.005584,,1.250000,
+3,Change in mean FTE employment,NJ,0.588021,0.590000,-0.001979,,0.540000,
+3,Change in mean FTE employment,NJ - PA,2.753606,2.760000,-0.006394,,1.360000,
+3,Change in mean FTE employment,NJ Low,1.320850,1.320000,0.000850,,0.950000,
+3,Change in mean FTE employment,NJ Mid,0.874899,0.870000,0.004899,,0.840000,
+3,Change in mean FTE employment,NJ High,-2.036232,-2.040000,0.003768,,1.140000,
+3,Change in mean FTE employment,Low - High,3.357082,3.360000,-0.002918,,1.480000,
+3,Change in mean FTE employment,Mid - High,2.911131,2.910000,0.001131,,1.410000,
+4,"Change in mean FTE employment, balanced sample",PA,-2.283333,-2.280000,-0.003333,1.253269,1.250000,75.000000
+4,"Change in mean FTE employment, balanced sample",NJ,0.466667,0.470000,-0.003333,0.480829,0.480000,309.000000
+4,"Change in mean FTE employment, balanced sample",NJ - PA,2.750000,2.750000,0.000000,1.342341,1.340000,
+4,"Change in mean FTE employment, balanced sample",NJ Low,1.204787,1.210000,-0.005213,0.822490,0.820000,94.000000
+4,"Change in mean FTE employment, balanced sample",NJ Mid,0.709848,0.710000,-0.000152,0.686227,0.690000,132.000000
+4,"Change in mean FTE employment, balanced sample",NJ High,-2.156716,-2.160000,0.003284,1.007321,1.010000,67.000000
+4,"Change in mean FTE employment, balanced sample",Low - High,3.361504,3.360000,0.001504,1.300455,1.300000,
+4,"Change in mean FTE employment, balanced sample",Mid - High,2.866565,2.870000,-0.003435,1.218853,1.220000,
+5,"Change in mean FTE employment, temporary closures = 0",PA,-2.283333,-2.280000,-0.003333,1.253269,1.250000,75.000000
+5,"Change in mean FTE employment, temporary closures = 0",NJ,0.225879,0.230000,-0.004121,0.490979,0.490000,313.000000
+5,"Change in mean FTE employment, temporary closures = 0",NJ - PA,2.509212,2.510000,-0.000788,1.346010,1.350000,
+5,"Change in mean FTE employment, temporary closures = 0",NJ Low,0.897368,0.900000,-0.002632,0.869916,0.870000,95.000000
+5,"Change in mean FTE employment, temporary closures = 0",NJ Mid,0.494030,0.490000,0.004030,0.692838,0.690000,134.000000
+5,"Change in mean FTE employment, temporary closures = 0",NJ High,-2.389706,-2.390000,0.000294,1.019380,1.020000,68.000000
+5,"Change in mean FTE employment, temporary closures = 0",Low - High,3.287074,3.290000,-0.002926,1.340108,1.340000,
+5,"Change in mean FTE employment, temporary closures = 0",Mid - High,2.883736,2.880000,0.003736,1.232542,1.230000,

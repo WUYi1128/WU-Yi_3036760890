@@ -1,0 +1,14 @@
+Section,Test,Replication,Benchmark,Difference,Tolerance,Pass
+Table 2,Wave 1 NJ FTE,20.439408,20.440000,-0.000592,0.020000,True
+Table 2,Wave 1 PA FTE,23.331169,23.330000,0.001169,0.020000,True
+Table 2,Wave 2 NJ FTE,21.027429,21.030000,-0.002571,0.020000,True
+Table 2,Wave 2 PA FTE,21.165584,21.170000,-0.004416,0.020000,True
+Table 3,Main DiD,2.753606,2.760000,-0.006394,0.020000,True
+Table 3,Balanced-sample DiD,2.750000,2.750000,0.000000,0.020000,True
+Table 3,Temporary-closure sensitivity,2.509212,2.510000,-0.000788,0.020000,True
+Table 4,Model (i) NJ coefficient,2.325831,2.330000,-0.004169,0.020000,True
+Table 4,Model (ii) NJ coefficient,2.303860,2.300000,0.003860,0.020000,True
+Table 4,Model (iii) GAP coefficient,15.652890,15.650000,0.002890,0.030000,True
+Table 4,Model (iv) GAP coefficient,14.915674,14.920000,-0.004326,0.030000,True
+Table 4,Model (v) GAP coefficient,11.979237,11.910000,0.069237,0.100000,True
+Figure 1,Wave 2 NJ share near $5.05,89.622642,89.620000,0.002642,0.050000,True
