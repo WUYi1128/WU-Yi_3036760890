@@ -28,10 +28,9 @@ def run_script(filename):
 
 
 def main():
-
     run_script("01_inspect_data.py")
-
     run_script("02_clean_data.py")
+    run_script("03_replicate_table2.py")
 
 
 if __name__ == "__main__":
