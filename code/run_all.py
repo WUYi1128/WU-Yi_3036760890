@@ -31,6 +31,8 @@ def main():
 
     run_script("01_inspect_data.py")
 
+    run_script("02_clean_data.py")
+
 
 if __name__ == "__main__":
     main()
