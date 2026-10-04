@@ -34,6 +34,7 @@ def main():
     run_script("04_replicate_table3.py")
     run_script("05_replicate_table4.py")
     run_script("06_replicate_figure1.py")
+    run_script("07_validation.py")
 
 
 if __name__ == "__main__":
