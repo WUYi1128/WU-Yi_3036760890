@@ -221,3 +221,7 @@ __marimo__/
 
 # Course-provided raw data - do not commit
 data/raw/public.csv
+
+# Course-provided and derived row-level data
+data/raw/public.csv
+data/processed/analysis_sample.csv
