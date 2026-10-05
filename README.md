@@ -28,6 +28,8 @@ The independent extension asks:
 
 ## Repository Structure
 
+## Repository Structure
+
 ```text
 WU-Yi_3036760890/
 │
@@ -44,12 +46,15 @@ WU-Yi_3036760890/
 │
 ├── data/
 │   ├── raw/
-│   │   └── public.csv
+│   │   ├── README.md
+│   │   └── DATA_DICTIONARY.md
+│   │
 │   └── processed/
-│       └── analysis_sample.csv
+│       └── README.md
 │
 ├── outputs/
 │   ├── tables/
+│   │   ├── README.md
 │   │   ├── table2_replication.csv
 │   │   ├── table3_replication.csv
 │   │   ├── table4_replication.csv
@@ -59,6 +64,7 @@ WU-Yi_3036760890/
 │   │   └── extension_chain_heterogeneity_test.csv
 │   │
 │   └── figures/
+│       ├── README.md
 │       ├── figure1_wage_distribution.png
 │       └── extension_chain_did.png
 │
@@ -67,4 +73,5 @@ WU-Yi_3036760890/
 │
 ├── AI_USE_DISCLOSURE.md
 ├── requirements.txt
-└── README.md
+├── README.md
+└── .gitignore
