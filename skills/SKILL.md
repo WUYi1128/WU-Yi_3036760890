@@ -1,97 +1,97 @@
-# Reusable Skill: Reproducing the Card & Krueger Empirical Analysis
+# ECO6067 Empirical Replication Project
 
-## Purpose
+## Card & Krueger (1994): Minimum Wages and Employment
 
-This document provides a reusable end-to-end workflow for reproducing the main empirical results in this ECO6067 replication project based on:
+This repository contains my ECO6067 individual empirical replication project based on:
 
 David Card and Alan B. Krueger (1994),  
 "Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania",  
 *American Economic Review*, 84(4), 772–793.
 
-The workflow is designed so that, once the required course-provided input dataset is placed in the correct local folder, the main data-processing steps, replicated tables, replicated figure, validation checks, and independent extension can be generated without manually editing the data or analysis code.
-
-The workflow covers:
-
-- inspection of the raw dataset;
-- construction of analysis variables;
-- cleaning and processing of the data;
-- replication of Table 2;
-- replication of Table 3;
-- replication of Table 4;
-- replication of Figure 1;
-- automated numerical validation;
-- an independent extension examining heterogeneous employment effects across restaurant chains;
-- generation of final tables and figures.
+The project reconstructs the main analysis dataset, reproduces selected tables and figures from the original study, validates the replicated results numerically, and develops an independent extension examining whether employment responses differed across restaurant chains.
 
 ---
 
-## Research Context
+## Research Question
 
-The original Card and Krueger study examines the employment effects of New Jersey's increase in the statutory minimum wage from \$4.25 to \$5.05 per hour in April 1992.
+The original study asks whether New Jersey's increase in the minimum wage from \$4.25 to \$5.05 per hour in April 1992 reduced employment in the fast-food industry.
 
-Pennsylvania did not experience the same minimum-wage increase and is therefore used as the comparison group.
+New Jersey is treated as the treatment group, while Pennsylvania serves as the comparison group because its minimum wage did not experience the same increase during the study period.
 
-The core empirical design is a difference-in-differences framework.
+The main empirical framework is difference-in-differences.
 
-Let \(Y_{st}\) denote an employment outcome for state \(s\) and period \(t\). The basic difference-in-differences estimand is
-
-$$
+```math
 \widehat{\mathrm{DiD}}
 =
-\left(
-\bar{Y}_{NJ,post}
+\left(\bar{Y}_{NJ,post}-\bar{Y}_{NJ,pre}\right)
 -
-\bar{Y}_{NJ,pre}
-\right)
--
-\left(
-\bar{Y}_{PA,post}
--
-\bar{Y}_{PA,pre}
-\right).
-$$
+\left(\bar{Y}_{PA,post}-\bar{Y}_{PA,pre}\right)
+```
 
-A positive value indicates that employment changed more favourably in New Jersey than in Pennsylvania over the sample period.
+A positive value means that employment changed more favourably in New Jersey than in Pennsylvania over the sample period.
 
-The project primarily uses full-time-equivalent employment. The constructed FTE measure follows the replication workflow:
+---
 
-$$
-FTE
+## Main Employment Measure
+
+The principal employment measure is full-time-equivalent employment.
+
+Before the minimum-wage increase:
+
+```math
+FTE_{\text{before}}
 =
 EMPFT
 +
-NMgrs
+NMGRS
 +
-0.5 \times EMPPT,
-$$
+0.5\,EMPPT
+```
 
-with the corresponding second-wave measure
+After the minimum-wage increase:
 
-$$
-FTE_2
+```math
+FTE_{\text{after}}
 =
 EMPFT2
 +
-NMgrs2
+NMGRS2
 +
-0.5 \times EMPPT2.
-$$
+0.5\,EMPPT2
+```
 
-The employment change for restaurant \(i\) is therefore
+Employment change for restaurant \(i\) is:
 
-$$
+```math
 \Delta FTE_i
 =
-FTE_{i,2}
+FTE_{i,\text{after}}
 -
-FTE_{i,1}.
-$$
+FTE_{i,\text{before}}
+```
 
 ---
 
-## Required Repository Structure
+## Main Replication Tasks
 
-The public GitHub repository should have the following structure:
+The project reproduces selected empirical results from:
+
+- Table 2: descriptive statistics;
+- Table 3: employment changes and difference-in-differences estimates;
+- Table 4: reduced-form employment regressions;
+- Figure 1: distribution of starting wage rates.
+
+The project also includes:
+
+- systematic raw-data inspection;
+- construction of analysis variables;
+- automated numerical validation;
+- an independent empirical extension;
+- a one-command reproducibility workflow.
+
+---
+
+## Repository Structure
 
 ```text
 WU-Yi_3036760890/
@@ -140,66 +140,32 @@ WU-Yi_3036760890/
 └── .gitignore
 ```
 
-### Local-only input and processed data
-
-Two files are required during local execution but are intentionally excluded from the public GitHub repository:
-
-```text
-data/raw/public.csv
-data/processed/analysis_sample.csv
-```
-
-`public.csv` is the course-provided dataset.
-
-`analysis_sample.csv` is generated from that dataset by the processing workflow.
-
-Because the source dataset was supplied as part of the ECO6067 course materials, neither the raw restaurant-level dataset nor its row-level processed derivative is distributed through the public GitHub repository.
-
 ---
 
-## Required Input
+## Data Access
 
-Before running the workflow locally, obtain the course-provided Card and Krueger dataset and place it at:
+The raw dataset used in this project was provided as part of the ECO6067 course materials.
+
+Following course guidance, the course-provided dataset is **not included in this public GitHub repository**.
+
+The row-level processed dataset generated from the course-provided data is also not publicly distributed.
+
+To reproduce the analysis, an authorised user should obtain the course-provided dataset and place it locally at:
 
 ```text
 data/raw/public.csv
 ```
-
-The filename and folder location should not be changed because the Python scripts use this expected relative path.
 
 The expected raw dataset contains:
 
 - 410 restaurant-level observations;
 - 46 original variables;
-- first-wave and second-wave survey information.
+- observations from New Jersey and Pennsylvania;
+- information from two survey waves.
 
-No manual modification of the raw CSV file is required.
+The raw CSV should not be manually modified.
 
----
-
-## Key Raw Variables
-
-Important variables used in the workflow include:
-
-| Variable | Interpretation |
-|---|---|
-| `SHEET` | Original store or survey-sheet identifier |
-| `CHAIN` | Restaurant chain identifier |
-| `CO_OWNED` | Indicator for company ownership |
-| `STATE` | State indicator: 1 = New Jersey, 0 = Pennsylvania |
-| `EMPFT` | Number of full-time employees in Wave 1 |
-| `EMPPT` | Number of part-time employees in Wave 1 |
-| `NMGRS` | Number of managers and assistant managers in Wave 1 |
-| `WAGE_ST` | Starting wage in Wave 1 |
-| `HRSOPEN` | Hours open per day in Wave 1 |
-| `EMPFT2` | Number of full-time employees in Wave 2 |
-| `EMPPT2` | Number of part-time employees in Wave 2 |
-| `NMGRS2` | Number of managers and assistant managers in Wave 2 |
-| `WAGE_ST2` | Starting wage in Wave 2 |
-| `HRSOPEN2` | Hours open per day in Wave 2 |
-| `STATUS2` | Second-wave survey status |
-
-A more detailed variable description is provided in:
+The project provides a description of the required variables in:
 
 ```text
 data/raw/DATA_DICTIONARY.md
@@ -207,11 +173,69 @@ data/raw/DATA_DICTIONARY.md
 
 ---
 
-## Reproduction Workflow
+## Local-Only Files
 
-### Step 1: Install Python dependencies
+The following files are required or generated during local reproduction but are intentionally excluded from the public repository:
 
-From the repository root, install the required Python packages:
+```text
+data/raw/public.csv
+data/processed/analysis_sample.csv
+```
+
+`public.csv` is the course-provided raw dataset.
+
+`analysis_sample.csv` is generated automatically by the data-processing script and contains row-level information derived from the course-provided data.
+
+---
+
+## Key Variables
+
+| Variable | Description |
+|---|---|
+| `SHEET` | Original store or survey-sheet identifier |
+| `CHAIN` | Restaurant chain identifier |
+| `CO_OWNED` | Company-ownership indicator |
+| `STATE` | State indicator: 1 = New Jersey, 0 = Pennsylvania |
+| `SOUTHJ` | Indicator for southern New Jersey |
+| `CENTRALJ` | Indicator for central New Jersey |
+| `NORTHJ` | Indicator for northern New Jersey |
+| `PA1` | Indicator for northeastern Philadelphia suburbs |
+| `PA2` | Indicator for the Easton area of Pennsylvania |
+| `EMPFT` | Number of full-time employees in Wave 1 |
+| `EMPPT` | Number of part-time employees in Wave 1 |
+| `NMGRS` | Number of managers and assistant managers in Wave 1 |
+| `WAGE_ST` | Starting wage in Wave 1 |
+| `HRSOPEN` | Hours open per day in Wave 1 |
+| `STATUS2` | Second-wave survey status |
+| `EMPFT2` | Number of full-time employees in Wave 2 |
+| `EMPPT2` | Number of part-time employees in Wave 2 |
+| `NMGRS2` | Number of managers and assistant managers in Wave 2 |
+| `WAGE_ST2` | Starting wage in Wave 2 |
+| `HRSOPEN2` | Hours open per day in Wave 2 |
+
+See `data/raw/DATA_DICTIONARY.md` for further details.
+
+---
+
+# Reproduction Instructions
+
+## 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+```
+
+Enter the project directory:
+
+```bash
+cd WU-Yi_3036760890
+```
+
+---
+
+## 2. Install Python Dependencies
+
+Install the required packages:
 
 ```bash
 pip install -r requirements.txt
@@ -219,21 +243,19 @@ pip install -r requirements.txt
 
 ---
 
-### Step 2: Add the course-provided dataset
+## 3. Add the Course-Provided Dataset
 
-Place the dataset at:
+Obtain the original ECO6067 course dataset and save it locally using the exact path:
 
 ```text
 data/raw/public.csv
 ```
 
-Do not rename the file.
-
-Do not commit this file to the public GitHub repository.
+Do not rename or manually modify the file.
 
 ---
 
-### Step 3: Run the complete workflow
+## 4. Run the Entire Project
 
 From the repository root, execute:
 
@@ -241,88 +263,48 @@ From the repository root, execute:
 python code/run_all.py
 ```
 
-The master script executes the component scripts in sequence.
+This command performs the complete replication workflow automatically.
 
----
-
-## Workflow Components
-
-### `01_inspect_data.py`
-
-Performs the initial inspection of the course-provided raw dataset.
-
-Checks include:
-
-- dataset dimensions;
-- variable names;
-- first observations;
-- state counts;
-- restaurant-chain counts;
-- second-wave response status;
-- missing values in key variables;
-- descriptive statistics.
-
-This stage provides a transparent check of the original input before any transformation occurs.
-
----
-
-### `02_clean_data.py`
-
-Constructs the variables required for the empirical analysis.
-
-Important constructed measures include:
-
-$$
-FTE_{before}
-=
-EMPFT
-+
-NMGRS
-+
-0.5 \times EMPPT,
-$$
-
-and
-
-$$
-FTE_{after}
-=
-EMPFT2
-+
-NMGRS2
-+
-0.5 \times EMPPT2.
-$$
-
-Employment change is calculated as
-
-$$
-\Delta FTE
-=
-FTE_{after}
--
-FTE_{before}.
-$$
-
-The script also creates variables needed for the state comparison, balanced sample, wage-gap specifications, and later replication stages.
-
-The processed dataset is written locally to:
+The workflow runs:
 
 ```text
-data/processed/analysis_sample.csv
+01_inspect_data.py
+        ↓
+02_clean_data.py
+        ↓
+03_replicate_table2.py
+        ↓
+04_replicate_table3.py
+        ↓
+05_replicate_table4.py
+        ↓
+06_replicate_figure1.py
+        ↓
+07_validation.py
+        ↓
+08_extension.py
 ```
 
-This file is generated automatically and is not distributed in the public repository.
+No manual modification of the input data or analysis code is required.
 
 ---
 
-### `03_replicate_table2.py`
+# Core Replication Results
 
-Replicates selected descriptive statistics from Table 2 of Card and Krueger (1994).
+## Table 2
 
-The script calculates key means separately for New Jersey and Pennsylvania and compares the results with the published values.
+The project reproduces selected descriptive statistics reported in Table 2.
 
-The output is saved to:
+| Statistic | Replication | Original |
+|---|---:|---:|
+| Wave 1 NJ FTE | 20.439 | 20.44 |
+| Wave 1 PA FTE | 23.331 | 23.33 |
+| Wave 2 NJ FTE | 21.027 | 21.03 |
+| Wave 2 PA FTE | 21.166 | 21.17 |
+
+The replicated values are extremely close to the published values.
+
+Output:
 
 ```text
 outputs/tables/table2_replication.csv
@@ -330,27 +312,29 @@ outputs/tables/table2_replication.csv
 
 ---
 
-### `04_replicate_table3.py`
+## Table 3
 
-Replicates the main employment-change and difference-in-differences results associated with Table 3.
+The main difference-in-differences estimator is:
 
-The central quantity is
-
-$$
+```math
 \widehat{\mathrm{DiD}}
 =
 \overline{\Delta FTE}_{NJ}
 -
-\overline{\Delta FTE}_{PA}.
-$$
+\overline{\Delta FTE}_{PA}
+```
 
-The script also examines:
+Selected results are:
 
-- the main sample;
-- the balanced sample;
-- a temporary-closure sensitivity sample.
+| Specification | Replication | Original |
+|---|---:|---:|
+| Main DiD | 2.754 | 2.76 |
+| Balanced-sample DiD | 2.750 | 2.75 |
+| Temporary-closure sensitivity | 2.509 | 2.51 |
 
-The output is saved to:
+The replicated estimates closely match the corresponding published values.
+
+Output:
 
 ```text
 outputs/tables/table3_replication.csv
@@ -358,141 +342,157 @@ outputs/tables/table3_replication.csv
 
 ---
 
-### `05_replicate_table4.py`
+## Table 4
 
-Replicates selected reduced-form employment regressions corresponding to Table 4.
+The Table 4 regression replication uses an estimation sample of 357 restaurants.
 
-The specifications use employment change as the dependent variable and reproduce the principal state- and wage-gap-based coefficients from the original analysis.
+Selected coefficient comparisons are:
 
-The output is saved to:
+| Model | Replication | Original |
+|---|---:|---:|
+| Model (i) | 2.326 | 2.33 |
+| Model (ii) | 2.304 | 2.30 |
+| Model (iii) | 15.653 | 15.65 |
+| Model (iv) | 14.916 | 14.92 |
+| Model (v) | 11.979 | 11.91 |
+
+The first four estimates are extremely close to the published coefficients.
+
+Model (v) shows a somewhat larger numerical difference, but it remains within the predefined replication tolerance.
+
+Output:
 
 ```text
 outputs/tables/table4_replication.csv
 ```
 
-The estimation sample contains 357 restaurants after applying the required sample restrictions and non-missing-variable conditions.
-
 ---
 
-### `06_replicate_figure1.py`
+## Figure 1
 
-Replicates the distribution of starting wage rates shown in Figure 1.
+The project reproduces the distribution of starting wage rates before and after the New Jersey minimum-wage increase.
 
-The script calculates wage distributions for:
+The replicated distribution shows a strong concentration of New Jersey Wave 2 starting wages around \$5.05.
 
-- New Jersey, Wave 1;
-- Pennsylvania, Wave 1;
-- New Jersey, Wave 2;
-- Pennsylvania, Wave 2.
+Approximately 89.62% of observed New Jersey Wave 2 starting wages are concentrated in the \$5.05 wage category.
 
-The numerical data are saved to:
+Numerical output:
 
 ```text
 outputs/tables/figure1_wage_distribution.csv
 ```
 
-The figure is saved to:
+Figure output:
 
 ```text
 outputs/figures/figure1_wage_distribution.png
 ```
 
-A central feature of the replicated figure is the concentration of New Jersey Wave 2 starting wages around the new \$5.05 minimum wage.
-
 ---
 
-### `07_validation.py`
+# Automated Validation
 
-Performs automated numerical validation of the core replication results.
+The project contains a separate validation script:
 
-The script compares replicated values with benchmark values from the original study using explicitly defined numerical tolerances.
+```text
+code/07_validation.py
+```
 
-The checks cover selected results from:
+It compares key replicated statistics with published benchmark values using explicitly defined numerical tolerances.
 
-- Table 2;
-- Table 3;
-- Table 4;
-- Figure 1.
+The validation covers:
 
-The validated workflow reports:
+- Table 2 descriptive statistics;
+- Table 3 DiD estimates;
+- Table 4 regression coefficients;
+- the principal Figure 1 pattern.
+
+The final validation result is:
 
 ```text
 Passed checks: 13/13
 All core replication checks passed.
 ```
 
-The complete validation table is saved to:
+The detailed validation results are saved in:
 
 ```text
 outputs/tables/validation_summary.csv
 ```
 
-This step ensures that the reproduced results are not accepted merely because they appear visually similar to the original study.
-
 ---
 
-## Independent Extension
+# Independent Extension
+
+## Research Question
 
 The independent extension asks:
 
 > Did the employment response to New Jersey's minimum-wage increase differ across restaurant chains?
 
-The extension is implemented in:
+The analysis is implemented in:
 
 ```text
 code/08_extension.py
 ```
 
-For each restaurant chain \(c\), the chain-specific difference-in-differences estimate is
+The balanced extension sample contains 384 restaurants.
 
-$$
+For chain \(c\), the chain-specific difference-in-differences estimator is:
+
+```math
 \widehat{\mathrm{DiD}}_c
 =
 \overline{\Delta FTE}_{NJ,c}
 -
-\overline{\Delta FTE}_{PA,c}.
-$$
-
-The extension considers:
-
-- Burger King;
-- KFC;
-- Roy Rogers;
-- Wendy's.
-
-The analysis reports chain-specific employment responses and conducts a joint heterogeneity test.
-
-The numerical outputs are saved to:
-
-```text
-outputs/tables/extension_chain_did.csv
-outputs/tables/extension_chain_heterogeneity_test.csv
+\overline{\Delta FTE}_{PA,c}
 ```
 
-The corresponding figure is saved to:
+The estimated results are:
 
-```text
-outputs/figures/extension_chain_did.png
-```
+| Chain | NJ Mean Change | PA Mean Change | Chain DiD |
+|---|---:|---:|---:|
+| Burger King | 1.345 | -3.045 | 4.390 |
+| KFC | 0.698 | 2.292 | -1.594 |
+| Roy Rogers | -1.438 | -3.926 | 2.488 |
+| Wendy's | 0.994 | -2.423 | 3.417 |
 
-The heterogeneity test produces:
+The point estimates vary across restaurant chains.
+
+However, a joint statistical test is required before concluding that these differences represent systematic heterogeneity.
+
+---
+
+## Joint Heterogeneity Test
+
+The extension produces:
 
 ```text
 F-statistic = 2.602
 p-value = 0.0518
 ```
 
-At the conventional 5% significance level, this does not provide sufficiently strong evidence to reject the null hypothesis of no systematic differences across restaurant chains.
+At the conventional 5% significance level, the null hypothesis of no systematic chain-level heterogeneity is not rejected.
 
-Because the p-value is close to 0.05 and some chain-specific comparison groups are relatively small, the result should be interpreted cautiously rather than as conclusive evidence of heterogeneous treatment effects.
+Because the p-value is close to 0.05, the results provide suggestive but not conclusive evidence of heterogeneous employment responses across restaurant chains.
+
+The interpretation should remain cautious because some chain-specific Pennsylvania comparison groups contain relatively few observations.
+
+Extension outputs:
+
+```text
+outputs/tables/extension_chain_did.csv
+outputs/tables/extension_chain_heterogeneity_test.csv
+outputs/figures/extension_chain_did.png
+```
 
 ---
 
-## Expected Outputs
+# Generated Outputs
 
-After successful execution, the main reproducible outputs are:
+## Tables
 
-### Tables
+The reproducibility workflow generates:
 
 ```text
 outputs/tables/table2_replication.csv
@@ -504,7 +504,13 @@ outputs/tables/extension_chain_did.csv
 outputs/tables/extension_chain_heterogeneity_test.csv
 ```
 
-### Figures
+These files contain aggregate empirical results rather than the course-provided row-level dataset.
+
+---
+
+## Figures
+
+The workflow generates:
 
 ```text
 outputs/figures/figure1_wage_distribution.png
@@ -513,93 +519,98 @@ outputs/figures/extension_chain_did.png
 
 ---
 
-## Validation Standard
+# Successful Reproduction Check
 
-A successful reproduction should satisfy three conditions.
-
-First, the component scripts should execute without errors.
-
-Second, the key replicated statistics should fall within the numerical tolerances specified in `07_validation.py`.
-
-Third, the validation script should report:
+A successful execution should finish with all scripts running without errors and the validation stage reporting:
 
 ```text
 Passed checks: 13/13
 All core replication checks passed.
 ```
 
-Small numerical differences from the published paper can arise from rounding, sample implementation, or specification details. These differences should be documented rather than manually altering results to force exact agreement.
-
----
-
-## Reproducibility Principle
-
-The workflow is intended to satisfy the following reproducibility condition:
-
-> Once an authorised user places the required course-provided input file at `data/raw/public.csv`, the principal tables, figures, validation results, and independent extension can be regenerated through a single master command without manually editing either the input data or the analysis code.
-
-The command is:
+The complete project can therefore be reproduced from the required input dataset using one command:
 
 ```bash
 python code/run_all.py
 ```
 
-This makes the workflow portable across machines because the analysis scripts use project-relative paths rather than user-specific absolute file paths.
+---
+
+# Reproducibility Design
+
+The project uses relative file paths rather than machine-specific absolute paths.
+
+The intended workflow is:
+
+```text
+Course-provided raw dataset
+          ↓
+Raw-data inspection
+          ↓
+Variable construction and cleaning
+          ↓
+Core empirical replication
+          ↓
+Numerical validation
+          ↓
+Independent extension
+          ↓
+Final tables and figures
+```
+
+This structure separates each analytical stage and makes the project easier to inspect, debug, audit, and reproduce.
+
+A reusable description of the workflow is provided in:
+
+```text
+skills/SKILL.md
+```
 
 ---
 
-## Data-Access Policy
+# AI Use Disclosure
 
-The raw course-provided dataset is intentionally excluded from the public GitHub repository.
+Artificial intelligence tools were used as supporting tools during parts of the project, including:
 
-The row-level processed dataset is also excluded because it is directly derived from the course-provided input data.
+- project and repository organisation;
+- Python code drafting and debugging;
+- reproducibility workflow design;
+- documentation;
+- interpretation checks;
+- report-writing assistance.
 
-The repository instead provides:
+AI-generated suggestions were not accepted without verification.
 
-- complete analysis code;
-- input-location instructions;
-- a data dictionary;
-- aggregate replication outputs;
-- aggregate extension outputs;
-- validation results;
-- reproducibility documentation.
+The code and empirical outputs were checked through local execution, comparison with the original study, inspection of generated tables and figures, and automated numerical validation.
 
-An authorised user can reproduce the project by obtaining the course-provided dataset and placing it at:
+A detailed record of AI use and verification is available in:
+
+```text
+AI_USE_DISCLOSURE.md
+```
+
+---
+
+# Data Availability Note
+
+The original input dataset is not distributed through this public repository because it was provided as part of the ECO6067 course materials.
+
+To reproduce the project, an authorised user should obtain the course-provided dataset and save it locally as:
 
 ```text
 data/raw/public.csv
 ```
 
-No manual alteration of the dataset is required.
+After the file is placed in that location, run:
+
+```bash
+python code/run_all.py
+```
+
+The workflow will reconstruct the required processed data and regenerate the principal tables, figures, validation results, and independent extension.
 
 ---
 
-## Reuse
+## Reference
 
-This workflow can be reused as a general empirical-replication template by replacing:
-
-1. the raw-data inspection stage;
-2. the variable-construction rules;
-3. the target empirical tables or figures;
-4. the benchmark validation values;
-5. the independent extension.
-
-The general structure remains:
-
-```text
-Raw input
-    ↓
-Data inspection
-    ↓
-Variable construction and cleaning
-    ↓
-Core replication
-    ↓
-Numerical validation
-    ↓
-Independent extension
-    ↓
-Final tables and figures
-```
-
-This separation between data preparation, replication, validation, and extension makes the workflow easier to audit, debug, and reproduce.
+Card, D., & Krueger, A. B. (1994). Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania. *American Economic Review*, 84(4), 772–793.
