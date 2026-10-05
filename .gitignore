@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Course-provided raw data - do not commit
+data/raw/public.csv
