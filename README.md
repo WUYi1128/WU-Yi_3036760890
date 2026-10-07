@@ -70,8 +70,15 @@ WU-Yi_3036760890/
 │
 ├── skills/
 │   └── SKILL.md
-│
 ├── AI_USE_DISCLOSURE.md
 ├── requirements.txt
+├── report.pdf
 ├── README.md
 └── .gitignore
+
+
+## Final Report
+
+The final empirical replication report is available here:
+
+[Final Report (PDF)](report.pdf)
